@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/main.css')}}" />
+    <title>Document</title>
+    <link rel="icon" href="data:,">
+
+</head>
+<body>
+    <div class="container">
+      <h2 id="head">FSND FINAL PROJECT</h2>
+      <button id="btn-login" disabled="true" onclick="login()">Login</button>
+      <button id="btn-logout" disabled="true" onclick="logout()">Logout</button>
+
+  
+        <div class="hidden" id="gated-content">
+          <p>
+            You're seeing this content because you're currently
+            <strong>logged in</strong>.
+          </p>
+          <label>
+            Access token:
+            <pre id="ipt-access-token"></pre>
+          </label>
+        </div>
+      <button id="movies" disabled="true" onclick="movies()">Movies</button>
+      <button id="actors" disabled="true" onclick="actors()">Actors</button>
+    </div>
+      <div id="movies-container">
+        <h3 id="title"></h3>
+        <h5 id="date"></h5>
+        <h5 id="movie_id"></h5>
+        <button id="back" onclick="back()">BACK</button>
+      </div>
+
+      <div id="actors-container">
+        <h3 id="name"></h3>
+        <h5 id="age"></h5>
+        <h5 id="gender"></h5>
+        <h5 id="actor_id"></h5>
+        <button id="back" onclick="back()">BACK</button>
+      </div>
+
+    <script src="https://cdn.auth0.com/js/auth0-spa-js/1.9/auth0-spa-js.production.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="{{url_for('static', filename='js/app.js')}}"></script>
+</body>
+</html>

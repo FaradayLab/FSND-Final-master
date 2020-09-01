@@ -1,52 +1,56 @@
-  .hidden {
-    display: none;
-  }
-  
-  label {
-    margin-bottom: 10px;
-    display: block;
-  }
 
-  body{
-    background-color:#f3f3f3;
-    font-family: sans-serif;
-    margin: 0;
-    font-size: 1.2em;
-  }
- 
-  button {
-    background-color: #2e819b; /* Green */
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-  }
-  .container{
-    text-align: center;
-    position:fixed;
-    top: 50%;
-    left: 50%;
-    width:30em;
-    height:18em;
-    margin-top: -9em;
-    margin-left: -15em;
-  }
 
-  #ipt-access-token { 
-    display: block;
-    white-space: pre-line;
-    max-width: 100px;
-  }
+label {
+  margin-bottom: 10px;
+  display: block;
+}
 
-  #movies-container{
-    margin-bottom: 1em;
-    text-align: center;
-  }
+body{
+  background-color:#f3f3f3;
+  font-family: sans-serif;
+  margin: 0;
+  font-size: 1.2em;
+}
 
-  #actors-container{
-    margin-bottom: 1em;
-    text-align: center;
-  }
+button {
+  background-color: #2e819b;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #2b7186;
+}
+button:active {
+  background-color: #163944;
+}
+.container{
+  text-align: center;
+}
+.hidden {
+  display: none;
+}
+#access-token-container{
+  display: flex;
+  justify-content: center;
+}
+#ipt-access-token { 
+  width: 50%;
+  overflow-x: auto;
+  font-size: .75em;
+}
+
+#movies-container{
+  margin-bottom: 1em;
+  text-align: center;
+}
+
+#actors-container{
+  margin-bottom: 1em;
+  text-align: center;
+}

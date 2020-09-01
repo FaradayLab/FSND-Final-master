@@ -10,32 +10,29 @@
 </head>
 <body>
     <div class="container">
-      <h2 id="head">FSND FINAL PROJECT</h2>
-      <button id="btn-login" disabled="true" onclick="login()">Login</button>
-      <button id="btn-logout" disabled="true" onclick="logout()">Logout</button>
+      <h2 id="head">CASTING AGENCY</h2>
+      <button id="btn-login" onclick="login()">Login</button>
+      <button id="btn-logout" class="hidden" disabled="true" onclick="logout()">Logout</button>
+      <!-- <button id="btn-logout" onclick="logout()">Logout</button> -->
 
-  
-        <div class="hidden" id="gated-content">
-          <p>
-            You're seeing this content because you're currently
-            <strong>logged in</strong>.
-          </p>
-          <label>
-            Access token:
-            <pre id="ipt-access-token"></pre>
-          </label>
+      <button id="movies" class="hidden" disabled="true" onclick="fetch_movies()">Movies</button>
+      <button id="actors" class="hidden" disabled="true" onclick="fetch_actors()">Actors</button>
+      <div class="hidden" id="gated-content">
+        <p>You are <strong>logged in</strong>.</p>
+        <p>Access token:</p>
+        <div id="access-token-container">
+          <p id="ipt-access-token"></p>
         </div>
-      <button id="movies" disabled="true" onclick="movies()">Movies</button>
-      <button id="actors" disabled="true" onclick="actors()">Actors</button>
+      </div>
     </div>
-      <div id="movies-container">
+      <div id="movies-container" class="hidden">
         <h3 id="title"></h3>
         <h5 id="date"></h5>
         <h5 id="movie_id"></h5>
         <button id="back" onclick="back()">BACK</button>
       </div>
 
-      <div id="actors-container">
+      <div id="actors-container" class="hidden">
         <h3 id="name"></h3>
         <h5 id="age"></h5>
         <h5 id="gender"></h5>

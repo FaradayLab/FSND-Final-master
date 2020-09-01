@@ -2,14 +2,14 @@ import json
 from flask import request, _request_ctx_stack, abort, session, redirect
 from functools import wraps
 from jose import jwt
-import urllib.request
+# import urllib.request
 from urllib.request import urlopen
 
 
-AUTH0_DOMAIN= 'dev-sphgry79.us.auth0.com'
-API_AUDIENCE= 'final'
+AUTH0_DOMAIN= 'alexfsnd.auth0.com'
+API_AUDIENCE= 'casting'
 ALGORITHMS= ['RS256']
-AUTH0_CLIENT_SECRET = 't7asTB_Dj-TebhrWTjnLUYyXe-o_bcWDHxJJhIEa_uV3dlhSi-KN5C4NiaPGUQng'
+# AUTH0_CLIENT_SECRET = 'hGoyeUVcsrieWZxkVxN6klkXV6VBIqq7LZAD4BFYRFvejtc3kAFfa-qQGJ7UP-bv'
 
 
 class AuthError(Exception):
@@ -19,27 +19,55 @@ class AuthError(Exception):
 
 def get_token_auth_header():
     auth = request.headers.get('Authorization', None)
-    if(not auth):
+    if not auth:
         raise AuthError({
             'code': 'authorization_header_missing',
-            'description': 'Authorization header is missing'
+            'description': 'Authorization header is expected.'
         }, 401)
 
-    parts = auth.split(' ')
-    if(parts[0].lower() != 'bearer'):
+    parts = auth.split()
+    if parts[0].lower() != 'bearer':
         raise AuthError({
             'code': 'invalid_header',
             'description': 'Authorization header must start with "Bearer".'
         }, 401)
-    
-    elif(len(parts) != 2 or not parts):
+
+    elif len(parts) == 1:
         raise AuthError({
             'code': 'invalid_header',
-            'description': 'Authorization header must be in the format Bearer token'
+            'description': 'Token not found.'
         }, 401)
-    
+
+    elif len(parts) > 2:
+        raise AuthError({
+            'code': 'invalid_header',
+            'description': 'Authorization header must be bearer token.'
+        }, 401)
+
     token = parts[1]
     return token
+    # auth = request.headers.get('Authorization', None)
+    # if(not auth):
+    #     raise AuthError({
+    #         'code': 'authorization_header_missing',
+    #         'description': 'Authorization header is missing'
+    #     }, 401)
+
+    # parts = auth.split(' ')
+    # if(parts[0].lower() != 'bearer'):
+    #     raise AuthError({
+    #         'code': 'invalid_header',
+    #         'description': 'Authorization header must start with "Bearer".'
+    #     }, 401)
+    
+    # elif(len(parts) != 2 or not parts):
+    #     raise AuthError({
+    #         'code': 'invalid_header',
+    #         'description': 'Authorization header must be in the format Bearer token'
+    #     }, 401)
+    
+    # token = parts[1]
+    # return token
 
 def check_permission(permission, payload):
     if('permissions' not in payload):

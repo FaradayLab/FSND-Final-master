@@ -10,7 +10,7 @@ class MoveisTestCase(unittest.TestCase):
         self.app = create_app()
         self.client = self.app.test_client
         self.database_name = 'finaltest'
-        self.database_path = "postgres://az@localhost:5432/"+self.database_name
+        self.database_path = "postgresql://postgres:postgres@localhost:5432/"+self.database_name
         setup_db(self.app, self.database_path)
 
         with self.app.app_context():
@@ -20,22 +20,22 @@ class MoveisTestCase(unittest.TestCase):
 
         self.new_movie = {
             'title': 'TEST',
-            'release_date': '2020-02-16'
+            'release_date': '2020-04-20'
         }
 
         self.new_actor = {
             'name': 'TEST',
-            'age': 12,
+            'age': 25,
             'gender': 'M'
         }
 
         self.update_movie = {
             'title': 'UPDATED',
-            'release_date': '2010-02-16'
+            'release_date': '2015-04-20'
         }
         self.update_actor = {
             'name': 'UPDATED',
-            'age': 20,
+            'age': 21,
             'gender': 'F'
         }
 

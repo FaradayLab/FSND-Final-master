@@ -9,8 +9,6 @@ from urllib.request import urlopen
 AUTH0_DOMAIN= 'alexfsnd.auth0.com'
 API_AUDIENCE= 'casting'
 ALGORITHMS= ['RS256']
-# AUTH0_CLIENT_SECRET = 'hGoyeUVcsrieWZxkVxN6klkXV6VBIqq7LZAD4BFYRFvejtc3kAFfa-qQGJ7UP-bv'
-
 
 class AuthError(Exception):
     def __init__(self, error, status_code):
@@ -46,28 +44,6 @@ def get_token_auth_header():
 
     token = parts[1]
     return token
-    # auth = request.headers.get('Authorization', None)
-    # if(not auth):
-    #     raise AuthError({
-    #         'code': 'authorization_header_missing',
-    #         'description': 'Authorization header is missing'
-    #     }, 401)
-
-    # parts = auth.split(' ')
-    # if(parts[0].lower() != 'bearer'):
-    #     raise AuthError({
-    #         'code': 'invalid_header',
-    #         'description': 'Authorization header must start with "Bearer".'
-    #     }, 401)
-    
-    # elif(len(parts) != 2 or not parts):
-    #     raise AuthError({
-    #         'code': 'invalid_header',
-    #         'description': 'Authorization header must be in the format Bearer token'
-    #     }, 401)
-    
-    # token = parts[1]
-    # return token
 
 def check_permission(permission, payload):
     if('permissions' not in payload):

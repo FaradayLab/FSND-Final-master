@@ -5,10 +5,8 @@ import os
 import datetime
 from flask_migrate import Migrate
 
-
-
-database_path = 'postgresql://postgres:postgres@localhost:5432/casting'
-# database_path = os.environ['DATABASE_URL']
+# database_path = 'postgresql://postgres:postgres@localhost:5432/casting'
+database_path = os.environ['DATABASE_URL']
 
 db = SQLAlchemy()
 

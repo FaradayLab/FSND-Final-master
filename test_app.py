@@ -22,7 +22,9 @@ class CastingTestCase(unittest.TestCase):
     def setUp(self):
         self.app = create_app()
         self.client = self.app.test_client
-        self.database_path = os.environ.get('DATABASE_URL')
+        self.database_name = 'finaltest'
+        self.database_path = "postgresql://{}:{}@{}/{}".format(
+            'postgres', 'postgres', 'localhost:5432', self.database_name)
         setup_db(self.app, self.database_path)
 
         with self.app.app_context():

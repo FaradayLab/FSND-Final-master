@@ -21,16 +21,21 @@ class CastingTestCase(unittest.TestCase):
     def setUp(self):
         self.app = create_app()
         self.client = self.app.test_client
-        self.database_name = 'finaltest'
+        # self.database_name = 'finaltest'
+        # self.database_path = "postgresql://{}:{}@{}/{}".format(
+            # 'postgres', 'postgres', 'localhost:5432', self.database_name)
+        self.database_name = 'dc1869s6pi3qpc'
         self.database_path = "postgresql://{}:{}@{}/{}".format(
-            'postgres', 'postgres', 'localhost:5432', self.database_name)
+            'bqtqbiadglkvmf', 
+            '2b8a9b057297778fdbd3df574d2a60282a364bc276b352472a8608cb2279a83c', 
+            'ec2-52-44-55-63.compute-1.amazonaws.com:5432', self.database_name)
         setup_db(self.app, self.database_path)
 
         with self.app.app_context():
             self.db = SQLAlchemy()
             self.db.init_app(self.app)
-            self.db.create_all()
-
+            self.type(db.create_all()
+)
         self.new_movie = {
             'title': 'TEST TITLE',
             'release_date': '2020-04-20'
@@ -161,7 +166,7 @@ class CastingTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
         self.assertEqual(data['movie'], movie_id)
-        self.assertTrue(data['total_movies'])
+        self.assertTrue(type(data['total_movies']) is int)
         self.assertEqual(movie, None)
 
     def test_delete_actor(self):
@@ -174,7 +179,7 @@ class CastingTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
         self.assertEqual(data['actor'], actor_id)
-        self.assertTrue(data['total_actors'])
+        self.assertTrue(type(data['total_actors']) is int)
         self.assertEqual(actor, None)
 
 

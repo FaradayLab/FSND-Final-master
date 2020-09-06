@@ -1,12 +1,15 @@
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import *
-import json
 import os
-import datetime
-from flask_migrate import Migrate
+import json
+# import datetime
+from flask_sqlalchemy import SQLAlchemy
+# from sqlalchemy import *
+from sqlalchemy import Column, String, Integer, create_engine
+# from flask_migrate import Migrate
 
-# database_path = 'postgresql://postgres:postgres@localhost:5432/casting'
-database_path = os.environ['DATABASE_URL']
+# database_path = os.environ['DATABASE_URL']
+database_path = os.environ.get('DATABASE_URL')
+if not database_path:
+   database_path = 'postgresql://postgres:postgres@localhost:5432/casting'
 
 db = SQLAlchemy()
 
@@ -14,16 +17,16 @@ def setup_db(app, database_path=database_path):
     app.config["SQLALCHEMY_DATABASE_URI"] = database_path
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
-    migrate = Migrate(app, db)
+   #  migrate = Migrate(app, db)
     db.init_app(app)
     db.create_all()
 
 class Movies(db.Model):
    __tablename__ = 'movies'
 
-   id = Column(Integer, primary_key=True)
-   title = Column(String())
-   release_date = Column(DateTime, default=datetime.datetime.utcnow)
+   id = db.Column(db.Integer, primary_key=True)
+   title = db.Column(db.String, nullable=False)
+   release_date = db.Column(db.DateTime, nullable=False)
 
 
    def __init__(self, title, release_date):
@@ -33,28 +36,28 @@ class Movies(db.Model):
    def insert(self):
       db.session.add(self)
       db.session.commit()
-   
-   def delete(self):
-      db.session.delete(self)
-      db.session.commit()
 
    def update(self):
+      db.session.commit()
+
+   def delete(self):
+      db.session.delete(self)
       db.session.commit()
 
    def format(self):
       return {
          'id': self.id,
          'title': self.title,
-         'release_date': self.release_date,
+         'release_date': str(self.release_date),
       }
 
 class Actors(db.Model):
-   id = Column(Integer, primary_key=True)
-   name = Column(String())
-   age = Column(Integer)
-   gender = Column(String())
+   __tablename__ = 'actors'
 
-
+   id = db.Column(db.Integer, primary_key=True)
+   name = db.Column(db.String, nullable=False)
+   age = db.Column(db.Integer, nullable=False)
+   gender = db.Column(db.String, nullable=False)
 
    def __init__(self, name, age, gender):
       self.name = name
@@ -65,13 +68,13 @@ class Actors(db.Model):
       db.session.add(self)
       db.session.commit()
 
+   def update(self):
+      db.session.commit()
+
    def delete(self):
       db.session.delete(self)
       db.session.commit()
 
-   def update(self):
-      db.session.commit()
-   
    def format(self):
       return {
          'id': self.id,

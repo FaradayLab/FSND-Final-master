@@ -1,25 +1,18 @@
-
-
-label {
-  margin-bottom: 10px;
-  display: block;
-}
-
-body{
+body {
   background-color:#f3f3f3;
   font-family: sans-serif;
   margin: 0;
-  font-size: 1.2em;
 }
 
 button {
-  background-color: #2e819b;
-  border: none;
-  color: white;
+  display: inline-block;
+  margin: 0em;
   padding: 15px 32px;
+  border: none;
+  background-color: #2e819b;
+  color: white;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
   font-size: 16px;
   cursor: pointer;
 }
@@ -29,29 +22,9 @@ button:hover {
 button:active {
   background-color: #163944;
 }
-.container{
-  text-align: center;
-  
-}
 .hidden {
   display: none;
 }
-#access-token-container{
-  display: flex;
-  justify-content: center;
-}
-#ipt-access-token { 
-  width: 50%;
-  overflow-x: auto;
-  font-size: .75em;
-}
-
-#movies-container{
-  margin-bottom: 1em;
-  text-align: center;
-}
-
-#actors-container{
-  margin-bottom: 1em;
+.container {
   text-align: center;
 }

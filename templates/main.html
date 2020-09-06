@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/main.css')}}" />
+    <title>CASTING AGENCY</title>
+    <link rel="icon" href="data:,">
+</head>
+<body>
+  <div class="container">
+    <h2 id="head">CASTING AGENCY</h2>
+    <div>
+      <button id="btn-login" onclick="login()">Login</button>
+      <button class="hidden" id="btn-logout" onclick="logout()">Logout</button>
+    </div>
+  </div>
+  <script src="https://cdn.auth0.com/js/auth0-spa-js/1.9/auth0-spa-js.production.js"></script>
+  <script src="{{url_for('static', filename='js/app.js')}}"></script>
+</body>
+</html>

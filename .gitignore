@@ -11,3 +11,9 @@ env
 .Trashes
 ehthumbs.db
 Thumbs.db
+templates/_main.html
+.misc
+old_test_app.py
+static/css/_main.css
+templates/actors.html
+templates/movies.html

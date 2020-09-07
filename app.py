@@ -6,6 +6,7 @@ from flask_cors import CORS
 from models import setup_db, Movies, Actors
 from auth.auth import AuthError, requires_auth
 
+
 def create_app(test_config=None):
     app = Flask(__name__,)
     app.debug = True
@@ -22,9 +23,9 @@ def create_app(test_config=None):
         end = start + 10
         return [data.format() for data in selection][start:end]
 
-	# ------------------------------------------------------------------------#
-	# Routes
-	# ------------------------------------------------------------------------#
+    # ------------------------------------------------------------------------#
+    # Routes
+    # ------------------------------------------------------------------------#
 
     @app.after_request
     def after_request(response):
@@ -70,7 +71,7 @@ def create_app(test_config=None):
 
     @app.route('/movies/<int:movie_id>', methods=['GET'])
     @requires_auth('get:movies')
-    def get_movie(payload,movie_id):
+    def get_movie(payload, movie_id):
         movie = Movies.query.filter(Movies.id == movie_id).one_or_none()
         if(movie is None):
             abort(404)
@@ -82,7 +83,7 @@ def create_app(test_config=None):
 
     @app.route('/actors/<int:actor_id>', methods=['GET'])
     @requires_auth('get:actors')
-    def get_actor(payload,actor_id):
+    def get_actor(payload, actor_id):
         actor = Actors.query.filter(Actors.id == actor_id).one_or_none()
         if(actor is None):
             abort(404)
@@ -104,7 +105,7 @@ def create_app(test_config=None):
         if not title or not release_date:
             abort(422)
 
-        movie = Movies(title = title, release_date = release_date)
+        movie = Movies(title=title, release_date=release_date)
         movie.insert()
 
         return jsonify({
@@ -120,13 +121,13 @@ def create_app(test_config=None):
         name = body.get('name', None)
         age = body.get('age', None)
         gender = body.get('gender', None)
-        
+
         if 'name' not in body or 'age' not in body or 'gender' not in body:
             abort(400)
         if not name or not age or not gender:
             abort(422)
 
-        actor = Actors(name = name, age = age, gender = gender)
+        actor = Actors(name=name, age=age, gender=gender)
         actor.insert()
 
         return jsonify({
@@ -209,7 +210,6 @@ def create_app(test_config=None):
             'actor': actor_id,
             'total_actors': len(Actors.query.all())
         }), 200
-
 
     @app.errorhandler(AuthError)
     def auth_error(error):

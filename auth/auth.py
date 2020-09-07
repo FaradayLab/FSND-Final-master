@@ -14,14 +14,16 @@ ALGORITHMS = os.environ.get('ALGORITHMS')
 JWKS = json.loads(os.environ.get('JWKS'))
 
 if not AUTH0_DOMAIN or not ALGORITHMS or not API_AUDIENCE:
-    AUTH0_DOMAIN= 'alexfsnd.auth0.com'
-    API_AUDIENCE= 'casting'
-    ALGORITHMS= ['RS256']
+    AUTH0_DOMAIN = 'alexfsnd.auth0.com'
+    API_AUDIENCE = 'casting'
+    ALGORITHMS = ['RS256']
+
 
 class AuthError(Exception):
     def __init__(self, error, status_code):
         self.error = error
         self.status_code = status_code
+
 
 def get_token_auth_header():
     auth = request.headers.get('Authorization', None)
@@ -54,19 +56,21 @@ def get_token_auth_header():
     token = parts[1]
     return token
 
+
 def check_permission(permission, payload):
     if 'permissions' not in payload:
         raise AuthError({
             'code': 'invalid_claims',
             'description': 'Permissions not included in JWT.'
         }, 400)
-    
+
     if permission not in payload['permissions']:
         raise AuthError({
             'code': 'unauthorized',
             'description': 'Permission not found'
         }, 401)
     return True
+
 
 def verify_decode_jwt(token):
     # jsonurl = urlopen(f'https://alexfsnd.auth0.com/.well-known/jwks.json')
@@ -80,9 +84,9 @@ def verify_decode_jwt(token):
             'code': 'invalid_header',
             'description': 'Authorization malformed'
         }, 401)
-    
+
     for key in JWKS['keys']:
-    # for key in jwks['keys']:
+        # for key in jwks['keys']:
         if(key['kid'] == unverified_header['kid']):
             rsa_key = {
                 'kty': key['kty'],
@@ -109,7 +113,7 @@ def verify_decode_jwt(token):
         except jwt.JWTClaimsError:
             raise AuthError({
                 'code': 'invalid_claims',
-                'description': 'incorrect claims. Please,'+
+                'description': 'incorrect claims. Please,' +
                 ' check the audience and issuer'
             }, 401)
         except Exception:
@@ -121,6 +125,7 @@ def verify_decode_jwt(token):
         'code': 'invalid_header',
         'description': 'Unable to find the appropriate key'
     }, 400)
+
 
 def requires_auth(permission=''):
     def requires_auth_decorator(f):
